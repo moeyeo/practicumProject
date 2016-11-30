@@ -9,24 +9,35 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import java.util.Random;
 
 public class World {
     private QuickAttacker quickAttacker;
-    private Block block;   
-    int gameStage = 0;
+    private BlackBlock blackBlock;
+    Random rand = new Random();
+    int[] pos = new int[4];
     
     public World(QuickAttacker quickAttacker){
         this.quickAttacker = quickAttacker;
-        if(Gdx.input.isKeyPressed(Keys.SPACE))
-        {
-            gameStage = 1;
-        }
+        pos = getRandom();
+        blackBlock = new BlackBlock(quickAttacker);
+        
     }
     
-    private void gameStage(){
-        if(gameStage==1)
-        {
-             
-        }
+    public int[] getRandom(){
+        int[] arr = new int[4];
+        for(int i=0; i<4 ; i++){
+            arr[i] = rand.nextInt(16)+1;
+            }
+        return arr;
+    }
+    
+    public int[] getPositionXBlock(){
+        return blackBlock.getPositionXBlock(pos);
+    }
+    
+    public int[] getPositionYBlock(){
+        return blackBlock.getPositionYBlock(pos);
     }
 }

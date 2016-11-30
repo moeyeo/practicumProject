@@ -13,12 +13,18 @@ public class GameScreen extends ScreenAdapter {
     public SpriteBatch batch;
     private QuickAttacker quickAttacker;
     private Texture bg;
+    private Texture blackBlock;
     private World world;
+    int[] x = new int[4];
+    int[] y = new int[4];
     
     public GameScreen(QuickAttacker quickAttacker) {
         this.quickAttacker = quickAttacker;
         bg = new Texture("bg.gif");
+        blackBlock = new Texture("blackBlock.png");
         world = new World(quickAttacker);
+        x = world.getPositionXBlock();
+        y = world.getPositionYBlock();
     }
     
     @Override
@@ -26,6 +32,10 @@ public class GameScreen extends ScreenAdapter {
         SpriteBatch batch = quickAttacker.batch;
         batch.begin();
         batch.draw(bg, 0, 0);
+        batch.draw(blackBlock, x[0], y[0]);
+        batch.draw(blackBlock, x[1], y[1]);
+        batch.draw(blackBlock, x[2], y[2]);
+        batch.draw(blackBlock, x[3], y[3]);
         batch.end();
     }
 	
