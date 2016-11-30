@@ -17,6 +17,7 @@ public class GameScreen extends ScreenAdapter {
     private World world;
     int[] x = new int[4];
     int[] y = new int[4];
+    int[] pos = new int[]{1,2,3,4};
     
     public GameScreen(QuickAttacker quickAttacker) {
         this.quickAttacker = quickAttacker;

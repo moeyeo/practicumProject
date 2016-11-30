@@ -99,67 +99,67 @@ public class BlackBlock {
         this.pos = pos;
         for(int i=0; i<4 ; i++){
             switch (pos[i]) {
-                case 1:
+                case 0:
                     x[i]=110;
+                    y[i]=398;
+                    break;
+                case 1:
+                    x[i]=259;
                     y[i]=398;
                     break;
                 case 2:
-                    x[i]=259;
+                    x[i]=410;
                     y[i]=398;
                     break;
                 case 3:
-                    x[i]=410;
+                    x[i]=561;
                     y[i]=398;
                     break;
                 case 4:
-                    x[i]=561;
-                    y[i]=398;
+                    x[i]=110;
+                    y[i]=294;
                     break;
                 case 5:
-                    x[i]=110;
+                    x[i]=259;
                     y[i]=294;
                     break;
                 case 6:
-                    x[i]=259;
+                    x[i]=410;
                     y[i]=294;
                     break;
                 case 7:
-                    x[i]=410;
+                    x[i]=561;
                     y[i]=294;
                     break;
                 case 8:
-                    x[i]=561;
-                    y[i]=294;
+                    x[i]=110;
+                    y[i]=187;
                     break;
                 case 9:
-                    x[i]=110;
+                    x[i]=259;
                     y[i]=187;
                     break;
                 case 10:
-                    x[i]=259;
+                    x[i]=410;
                     y[i]=187;
                     break;
                 case 11:
-                    x[i]=410;
-                    y[i]=187;
-                    break;
-                case 12:
                     x[i]=561;
                     y[i]=187;
                     break;
-                case 13:
+                case 12:
                     x[i]=110;
                     y[i]=85;
                     break;
-                case 14:
+                case 13:
                     x[i]=259;
                     y[i]=85;
                     break;
-                case 15:
+                case 14:
                     x[i]=410;
                     y[i]=85;
                     break;
-                case 16:
+                case 15:
                     x[i]=561;
                     y[i]=85;
                     break;
