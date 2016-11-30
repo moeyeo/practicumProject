@@ -30,6 +30,21 @@ public class World {
         for(int i=0; i<4 ; i++){
             arr[i] = rand.nextInt(16)+1;
             }
+        arr = checkArray(arr);
+        return arr;
+    }
+    
+    public int[] checkArray(int[] arr){
+        for(int i=0; i<arr.length ; i++){
+            for(int j=i+1 ; j<arr.length ; j++){
+                if(arr[i] == arr[j]){
+                    arr[i] = rand.nextInt(16)+1;
+                    checkArray(arr);
+                }
+                else
+                    return arr;
+            }
+        }
         return arr;
     }
     
