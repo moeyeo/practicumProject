@@ -18,7 +18,6 @@ public class GameScreen extends ScreenAdapter {
     float delta;
     int[] x = new int[4];
     int[] y = new int[4];
-    int[] pos = new int[]{1,2,3,4};
     
     public GameScreen(QuickAttacker quickAttacker) {
         this.quickAttacker = quickAttacker;
@@ -31,8 +30,10 @@ public class GameScreen extends ScreenAdapter {
     
     @Override
     public void render (float delta) {
-        float a = world.player1();
-            System.out.println(a);
+        int time1 = world.player1();
+        int time2 = world.player2();
+        if(time1 !=0 && time2 != 0)
+            world.compare(time1, time2);    
         SpriteBatch batch = quickAttacker.batch;
         batch.begin();
         batch.draw(bg, 0, 0);
