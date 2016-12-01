@@ -15,6 +15,7 @@ public class GameScreen extends ScreenAdapter {
     private Texture bg;
     private Texture blackBlock;
     private World world;
+    float delta;
     int[] x = new int[4];
     int[] y = new int[4];
     int[] pos = new int[]{1,2,3,4};
@@ -30,6 +31,8 @@ public class GameScreen extends ScreenAdapter {
     
     @Override
     public void render (float delta) {
+        float a = world.player1();
+            System.out.println(a);
         SpriteBatch batch = quickAttacker.batch;
         batch.begin();
         batch.draw(bg, 0, 0);
@@ -39,5 +42,4 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(blackBlock, x[3], y[3]);
         batch.end();
     }
-	
 }

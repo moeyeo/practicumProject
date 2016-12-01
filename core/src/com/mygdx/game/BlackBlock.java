@@ -13,8 +13,6 @@ public class BlackBlock {
     private Texture blackBlock;
     private SpriteBatch batch;
     int[] pos = new int[4];
-    int[] x = new int[4];
-    int[] y = new int[4];
     
     public BlackBlock(QuickAttacker q){
         this.quickAttacker = q;
@@ -23,72 +21,56 @@ public class BlackBlock {
     }
     
     public int[] getPositionXBlock(int[] pos){
-        this.pos = pos;
+        int[] x = new int[4];
         for(int i=0; i<4 ; i++){
             switch (pos[i]) {
-                case 1:
+                case 0:
                     x[i]=110;
-                    y[i]=398;
+                    break;
+                case 1:
+                    x[i]=259;
                     break;
                 case 2:
-                    x[i]=259;
-                    y[i]=398;
+                    x[i]=410;
                     break;
                 case 3:
-                    x[i]=410;
-                    y[i]=398;
+                    x[i]=561;
                     break;
                 case 4:
-                    x[i]=561;
-                    y[i]=398;
+                    x[i]=110;
                     break;
                 case 5:
-                    x[i]=110;
-                    y[i]=294;
+                    x[i]=259;
                     break;
                 case 6:
-                    x[i]=259;
-                    y[i]=294;
+                    x[i]=410;
                     break;
                 case 7:
-                    x[i]=410;
-                    y[i]=294;
+                    x[i]=561;
                     break;
                 case 8:
-                    x[i]=561;
-                    y[i]=294;
+                    x[i]=110;
                     break;
                 case 9:
-                    x[i]=110;
-                    y[i]=187;
+                    x[i]=259;
                     break;
                 case 10:
-                    x[i]=259;
-                    y[i]=187;
+                    x[i]=410;
                     break;
                 case 11:
-                    x[i]=410;
-                    y[i]=187;
+                    x[i]=561;
                     break;
                 case 12:
-                    x[i]=561;
-                    y[i]=187;
+                    x[i]=110;
                     break;
                 case 13:
-                    x[i]=110;
-                    y[i]=85;
+                    x[i]=259;
                     break;
                 case 14:
-                    x[i]=259;
-                    y[i]=85;
+                    x[i]=410;
                     break;
                 case 15:
-                    x[i]=410;
-                    y[i]=85;
-                    break;
-                case 16:
                     x[i]=561;
-                    y[i]=85;
                     break;
             }
         }
@@ -96,71 +78,55 @@ public class BlackBlock {
     }
     
     public int[] getPositionYBlock(int[] pos){
-        this.pos = pos;
+        int[] y = new int[4];
         for(int i=0; i<4 ; i++){
             switch (pos[i]) {
                 case 0:
-                    x[i]=110;
                     y[i]=398;
                     break;
                 case 1:
-                    x[i]=259;
                     y[i]=398;
                     break;
                 case 2:
-                    x[i]=410;
                     y[i]=398;
                     break;
                 case 3:
-                    x[i]=561;
                     y[i]=398;
                     break;
                 case 4:
-                    x[i]=110;
                     y[i]=294;
                     break;
                 case 5:
-                    x[i]=259;
                     y[i]=294;
                     break;
                 case 6:
-                    x[i]=410;
                     y[i]=294;
                     break;
                 case 7:
-                    x[i]=561;
                     y[i]=294;
                     break;
                 case 8:
-                    x[i]=110;
                     y[i]=187;
                     break;
                 case 9:
-                    x[i]=259;
                     y[i]=187;
                     break;
                 case 10:
-                    x[i]=410;
                     y[i]=187;
                     break;
                 case 11:
-                    x[i]=561;
                     y[i]=187;
                     break;
                 case 12:
-                    x[i]=110;
                     y[i]=85;
                     break;
                 case 13:
-                    x[i]=259;
                     y[i]=85;
                     break;
                 case 14:
-                    x[i]=410;
                     y[i]=85;
                     break;
                 case 15:
-                    x[i]=561;
                     y[i]=85;
                     break;
             }
