@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import java.util.Random;
 
 public class World {
@@ -18,26 +9,42 @@ public class World {
     private BlackBlock blackBlock;
     Random rand = new Random();
     int[] numBlock = new int[4];
+    int[] sword = new int[6];
+    int[] defense = new int[2];
     boolean[] player1;
     boolean[] player2; 
     int timePlayer1;
     int timePlayer2;
+    int attacker = 0;
+    int gameStage = 1;
     
     public World(QuickAttacker quickAttacker){
         this.quickAttacker = quickAttacker;
         blackBlock = new BlackBlock(quickAttacker);
         do {
-            numBlock = getRandom();
+            numBlock = getRandom(numBlock);
         } while(checkArray(numBlock) == false);
- 
         player1 = setButton(numBlock);
         player2 = setButton(numBlock);
+        do {
+            sword = getRandom(sword);
+        } while(checkArray(sword) == false);
+        do {
+            defense = getRandom(defense);
+        } while(checkArray(defense) == false);
+    }
+    
+    public void render(){
+        int time1 = player1();
+        int time2 = player2();
+        if(time1!=0 && time2!=0)
+            compare(time1, time2); 
     }
     
     public int player1(){
         if(!checkPass(player1)){
             timePlayer1 += 1;
-             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+            if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
                 player1[0]=true;
             }
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
@@ -153,10 +160,26 @@ public class World {
     }
      
     public void compare(int time1, int time2) {
-        if(time1<time2)
+        if (time1<time2) {
             System.out.println("Player1 Win!!!");
-        else if(time2<time1)
+            attacker = 1;
+            gameStage = 2;
+            System.out.println(gameStage);
+            for(int i = 0; i<sword.length; i++){
+                System.out.println(sword[i]);
+            }
+        } else if (time2<time1) {
             System.out.println("Player2 Win!!!");
+            attacker = 2;
+            gameStage = 2;
+            System.out.println(gameStage);
+        } else if (time1==time2) {
+            System.out.println("Draw");
+            gameStage = 2;
+            System.out.println(gameStage);
+        }
+        timePlayer1 =0;
+        timePlayer2 =0;
     }
     
     public boolean checkPass(boolean[] arr){
@@ -181,9 +204,8 @@ public class World {
         return bool;
     }
     
-    public int[] getRandom(){
-        int[] arr = new int[4];
-        for(int i=0; i<4 ; i++){
+    public int[] getRandom(int[] arr){
+        for(int i=0; i<arr.length ; i++){
             arr[i] = rand.nextInt(15)+0;
         }
         return arr;
@@ -208,11 +230,23 @@ public class World {
         return blackBlock.getPositionYBlock(numBlock);
     }
     
+    public int[] getPositionSwordX(){
+        return blackBlock.getPositionXBlock(sword);
+    }
+    
+    public int[] getPositionSwordY(){
+        return blackBlock.getPositionYBlock(sword);
+    }
+    
     public boolean[] getPlayer1(){
         return player1;
     }
     
     public boolean[] getPlayer2(){
         return player2;
+    }
+    
+    public int getGameStage() {
+        return gameStage;
     }
 }

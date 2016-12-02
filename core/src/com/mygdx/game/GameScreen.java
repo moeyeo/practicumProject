@@ -14,33 +14,39 @@ public class GameScreen extends ScreenAdapter {
     private QuickAttacker quickAttacker;
     private Texture bg;
     private Texture blackBlock;
+    private Texture redBlock;
+    private Texture blueBlock;
     private World world;
     float delta;
     int[] x = new int[4];
     int[] y = new int[4];
+    int[] swordX = new int[6];
+    int[] swordY = new int[6];
+    int gameStage;
     
     public GameScreen(QuickAttacker quickAttacker) {
         this.quickAttacker = quickAttacker;
         bg = new Texture("bg.gif");
         blackBlock = new Texture("blackBlock.png");
+        redBlock = new Texture("redBlock.png");
+        blueBlock = new Texture("blueBlock.png");
         world = new World(quickAttacker);
         x = world.getPositionXBlock();
         y = world.getPositionYBlock();
+        swordX = world.getPositionSwordX();
+        swordY = world.getPositionSwordY();
     }
     
     @Override
     public void render (float delta) {
-        int time1 = world.player1();
-        int time2 = world.player2();
-        if(time1 !=0 && time2 != 0)
-            world.compare(time1, time2);    
+        world.render();
+        gameStage = world.getGameStage();
         SpriteBatch batch = quickAttacker.batch;
-        batch.begin();
-        batch.draw(bg, 0, 0);
-        batch.draw(blackBlock, x[0], y[0]);
-        batch.draw(blackBlock, x[1], y[1]);
-        batch.draw(blackBlock, x[2], y[2]);
-        batch.draw(blackBlock, x[3], y[3]);
-        batch.end();
+            batch.begin();
+            batch.draw(bg, 0, 0);
+            for(int i = 0; i<x.length; i++){
+                batch.draw(blackBlock, x[i], y[i]);
+            }
+            batch.end();
     }
 }

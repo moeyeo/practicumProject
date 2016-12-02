@@ -21,8 +21,9 @@ public class BlackBlock {
     }
     
     public int[] getPositionXBlock(int[] pos){
-        int[] x = new int[4];
-        for(int i=0; i<4 ; i++){
+        int a = pos.length;
+        int[] x = new int[a];
+        for(int i=0; i<a ; i++){
             switch (pos[i]) {
                 case 0:
                     x[i]=110;
@@ -78,8 +79,9 @@ public class BlackBlock {
     }
     
     public int[] getPositionYBlock(int[] pos){
-        int[] y = new int[4];
-        for(int i=0; i<4 ; i++){
+        int a = pos.length;
+        int[] y = new int[a];
+        for(int i=0; i<a ; i++){
             switch (pos[i]) {
                 case 0:
                     y[i]=398;
