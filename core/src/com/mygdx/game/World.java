@@ -9,14 +9,17 @@ public class World {
     private BlackBlock blackBlock;
     Random rand = new Random();
     int[] numBlock = new int[4];
-    int[] sword = new int[6];
-    int[] defense = new int[2];
+    int[] numSword = new int[6];
+    int[] numDefense = new int[2];
+    boolean[] sword;
+    boolean[] defense;
     boolean[] player1;
     boolean[] player2; 
     int timePlayer1;
     int timePlayer2;
-    int attacker = 0;
     int gameStage = 1;
+    int scorePlayer1 = 0;
+    int scorePlayer2 = 0;
     
     public World(QuickAttacker quickAttacker){
         this.quickAttacker = quickAttacker;
@@ -27,22 +30,51 @@ public class World {
         player1 = setButton(numBlock);
         player2 = setButton(numBlock);
         do {
-            sword = getRandom(sword);
-        } while(checkArray(sword) == false);
-        do {
-            defense = getRandom(defense);
-        } while(checkArray(defense) == false);
+            do {
+                numSword = getRandom(numSword);
+            } while(checkArray(numSword) == false);
+            do {
+                numDefense = getRandom(numDefense);
+            } while(checkArray(numDefense) == false);
+        } while(checkArray2(numDefense,numSword) == false);
+        sword = setButton(numSword);
+        defense = setButton(numDefense);
+        
     }
     
     public void render(){
-        int time1 = player1();
-        int time2 = player2();
-        if(time1!=0 && time2!=0)
-            compare(time1, time2); 
+        if(gameStage==1) {
+            int time1 = player1Stage(player1,numBlock);
+            int time2 = player2Stage(player2,numBlock);
+            if(time1!=0 && time2!=0)
+                compare(time1, time2);
+        }
+        if(gameStage==2) {
+            int atime1 = player1Stage(sword,numSword);
+            int atime2 = player2Stage(defense,numDefense);
+            if(atime1>atime2) {
+                System.out.println("Attack Success!!");
+                scorePlayer1++;
+                gameStage=0;
+            }
+            if(atime1<atime2)
+                System.out.println("Attack fail!!");
+        }
+        if(gameStage==3) {
+            int btime1 = player1Stage(defense,numDefense);
+            int btime2 = player2Stage(sword,numSword);
+            if(btime1>btime2)
+                System.out.println("Attack fail!!");
+            if(btime1<btime2) {
+                System.out.println("Attack Success!!");
+                scorePlayer2++;
+                gameStage=0;
+            }
+        }
     }
     
-    public int player1(){
-        if(!checkPass(player1)){
+    public int player1Stage(boolean[] player1, int[] num){
+        if(!checkPass(player1,num)){
             timePlayer1 += 1;
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
                 player1[0]=true;
@@ -100,8 +132,8 @@ public class World {
         return 0;
     }
     
-     public int player2(){ 
-        if(!checkPass(player2)){
+     public int player2Stage(boolean[] player2, int[] num){ 
+        if(!checkPass(player2,num)){
             timePlayer2 += 1;
             if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
                 player2[0]=true;
@@ -162,30 +194,38 @@ public class World {
     public void compare(int time1, int time2) {
         if (time1<time2) {
             System.out.println("Player1 Win!!!");
-            attacker = 1;
             gameStage = 2;
             System.out.println(gameStage);
-            for(int i = 0; i<sword.length; i++){
-                System.out.println(sword[i]);
-            }
         } else if (time2<time1) {
             System.out.println("Player2 Win!!!");
-            attacker = 2;
-            gameStage = 2;
+            gameStage = 3;
             System.out.println(gameStage);
         } else if (time1==time2) {
             System.out.println("Draw");
-            gameStage = 2;
+            gameStage = 0;
             System.out.println(gameStage);
         }
         timePlayer1 =0;
         timePlayer2 =0;
     }
     
-    public boolean checkPass(boolean[] arr){
-        for(int i=0 ; i<arr.length; i++){
-            if(arr[i]==false)
+    public boolean checkPass(boolean[] arr,int[] num){
+        int count = 0;
+        if(gameStage==1) {
+            for(int i=0 ; i<arr.length; i++){
+                if(arr[i]==false)
+                    return false;
+            }
+        }
+        else {
+            for(int i=0 ; i<arr.length; i++){
+                if(arr[i]==false) {
+                    count++;
+                }
+            }
+            if(count==num.length)
                 return false;
+            return true;
         }
         return true;
     }
@@ -222,6 +262,17 @@ public class World {
         return true;
     }
     
+    public boolean checkArray2(int[] arr1,int[] arr2){
+        for(int i=0; i<arr1.length ; i++){
+            for(int j=0 ; j<arr2.length ; j++){
+                if(arr1[i] == arr2[j]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     public int[] getPositionXBlock(){
         return blackBlock.getPositionXBlock(numBlock);
     }
@@ -231,11 +282,18 @@ public class World {
     }
     
     public int[] getPositionSwordX(){
-        return blackBlock.getPositionXBlock(sword);
+        return blackBlock.getPositionXBlock(numSword);
     }
     
     public int[] getPositionSwordY(){
-        return blackBlock.getPositionYBlock(sword);
+        return blackBlock.getPositionYBlock(numSword);
+    }
+    public int[] getPositionDefenseX(){
+        return blackBlock.getPositionXBlock(numDefense);
+    }
+    
+    public int[] getPositionDefenseY(){
+        return blackBlock.getPositionYBlock(numDefense);
     }
     
     public boolean[] getPlayer1(){
@@ -248,5 +306,13 @@ public class World {
     
     public int getGameStage() {
         return gameStage;
+    }
+    
+    public int getScorePlayer1() {
+        return scorePlayer1;
+    }
+    
+    public int getScorePlayer2() {
+        return scorePlayer2;
     }
 }
