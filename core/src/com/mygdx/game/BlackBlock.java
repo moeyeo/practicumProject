@@ -13,6 +13,14 @@ public class BlackBlock {
     private Texture blackBlock;
     private SpriteBatch batch;
     int[] pos = new int[4];
+    private final int Y0 = 375;
+    private final int Y1 = 271;
+    private final int Y2 = 164;
+    private final int Y3 = 62;
+    private final int X0 = 367;
+    private final int X1 = 515;
+    private final int X2 = 666;
+    private final int X3 = 817;
     
     public BlackBlock(QuickAttacker q){
         this.quickAttacker = q;
@@ -26,52 +34,52 @@ public class BlackBlock {
         for(int i=0; i<a ; i++){
             switch (pos[i]) {
                 case 0:
-                    x[i]=110;
+                    x[i]=X0;
                     break;
                 case 1:
-                    x[i]=259;
+                    x[i]=X1;
                     break;
                 case 2:
-                    x[i]=410;
+                    x[i]=X2;
                     break;
                 case 3:
-                    x[i]=561;
+                    x[i]=X3;
                     break;
                 case 4:
-                    x[i]=110;
+                    x[i]=X0;
                     break;
                 case 5:
-                    x[i]=259;
+                    x[i]=X1;
                     break;
                 case 6:
-                    x[i]=410;
+                    x[i]=X2;
                     break;
                 case 7:
-                    x[i]=561;
+                    x[i]=X3;
                     break;
                 case 8:
-                    x[i]=110;
+                    x[i]=X0;
                     break;
                 case 9:
-                    x[i]=259;
+                    x[i]=X1;
                     break;
                 case 10:
-                    x[i]=410;
+                    x[i]=X2;
                     break;
                 case 11:
-                    x[i]=561;
+                    x[i]=X3;
                     break;
                 case 12:
-                    x[i]=110;
+                    x[i]=X0;
                     break;
                 case 13:
-                    x[i]=259;
+                    x[i]=X1;
                     break;
                 case 14:
-                    x[i]=410;
+                    x[i]=X2;
                     break;
                 case 15:
-                    x[i]=561;
+                    x[i]=X3;
                     break;
             }
         }
@@ -84,52 +92,52 @@ public class BlackBlock {
         for(int i=0; i<a ; i++){
             switch (pos[i]) {
                 case 0:
-                    y[i]=398;
+                    y[i]=Y0;
                     break;
                 case 1:
-                    y[i]=398;
+                    y[i]=Y0;
                     break;
                 case 2:
-                    y[i]=398;
+                    y[i]=Y0;
                     break;
                 case 3:
-                    y[i]=398;
+                    y[i]=Y0;
                     break;
                 case 4:
-                    y[i]=294;
+                    y[i]=Y1;
                     break;
                 case 5:
-                    y[i]=294;
+                    y[i]=Y1;
                     break;
                 case 6:
-                    y[i]=294;
+                    y[i]=Y1;
                     break;
                 case 7:
-                    y[i]=294;
+                    y[i]=Y1;
                     break;
                 case 8:
-                    y[i]=187;
+                    y[i]=Y2;
                     break;
                 case 9:
-                    y[i]=187;
+                    y[i]=Y2;
                     break;
                 case 10:
-                    y[i]=187;
+                    y[i]=Y2;
                     break;
                 case 11:
-                    y[i]=187;
+                    y[i]=Y2;
                     break;
                 case 12:
-                    y[i]=85;
+                    y[i]=Y3;
                     break;
                 case 13:
-                    y[i]=85;
+                    y[i]=Y3;
                     break;
                 case 14:
-                    y[i]=85;
+                    y[i]=Y3;
                     break;
                 case 15:
-                    y[i]=85;
+                    y[i]=Y3;
                     break;
             }
         }

@@ -34,7 +34,7 @@ public class GameScreen extends ScreenAdapter {
     
     public GameScreen(QuickAttacker quickAttacker) {
         this.quickAttacker = quickAttacker;
-        bg = new Texture("bg.gif");
+        bg = new Texture("bg-center.gif");
         blackBlock = new Texture("blackblock.png");
         redBlock = new Texture("redblock.png");
         blueBlock = new Texture("blueblock.png");
@@ -52,20 +52,27 @@ public class GameScreen extends ScreenAdapter {
     
     @Override
     public void render (float delta) {
+        x = world.getPositionXBlock();
+        y = world.getPositionYBlock();
+        swordX = world.getPositionSwordX();
+        swordY = world.getPositionSwordY();
+        defenseX = world.getPositionDefenseX();
+        defenseY = world.getPositionDefenseY();
         world.render();
         gameStage = world.getGameStage();
         SpriteBatch batch = quickAttacker.batch;
         if(gameStage==0) {
             batch.begin();
             batch.draw(bg, 0, 0);
-            font.draw(batch,""+world.getScorePlayer1(),880, 580);
-            font.draw(batch,""+world.getScorePlayer2(),1130, 580);
+            font.draw(batch,""+world.getScorePlayer2(),150, 580);
+            font.draw(batch,""+world.getScorePlayer1(),1130, 580);
             batch.end();
+            //gameStage=1;
         }
         if(gameStage==1) {    
             batch.begin();
             batch.draw(bg, 0, 0);
-            font.draw(batch,""+world.getScorePlayer1(),880, 580);
+            font.draw(batch,""+world.getScorePlayer1(),150, 580);
             font.draw(batch,""+world.getScorePlayer2(),1130, 580);
             for(int i = 0; i<x.length; i++){
                 batch.draw(blackBlock, x[i], y[i]);
@@ -75,28 +82,28 @@ public class GameScreen extends ScreenAdapter {
         if(gameStage==2) {    
             batch.begin();
             batch.draw(bg, 0, 0);
-            batch.draw(redTable, 72, 48);
-            font.draw(batch,""+world.getScorePlayer1(),880, 580);
-            font.draw(batch,""+world.getScorePlayer2(),1130, 580);
-            for(int i = 0; i<swordX.length; i++){
-                batch.draw(redBlock, swordX[i], swordY[i]);
-            }
-            for(int i = 0; i<defenseX.length; i++){
-                batch.draw(blueBlock, defenseX[i], defenseY[i]);
-            }
-            batch.end();
-        }
-        if(gameStage==3) {    
-            batch.begin();
-            batch.draw(bg, 0, 0);
             batch.draw(blueTable, 72, 48);
-            font.draw(batch,""+world.getScorePlayer1(),880, 580);
+            font.draw(batch,""+world.getScorePlayer1(),150, 580);
             font.draw(batch,""+world.getScorePlayer2(),1130, 580);
             for(int i = 0; i<swordX.length; i++){
                 batch.draw(blueBlock, swordX[i], swordY[i]);
             }
             for(int i = 0; i<defenseX.length; i++){
                 batch.draw(redBlock, defenseX[i], defenseY[i]);
+            }
+            batch.end();
+        }
+        if(gameStage==3) {    
+            batch.begin();
+            batch.draw(bg, 0, 0);
+            batch.draw(redTable, 72, 48);
+            font.draw(batch,""+world.getScorePlayer1(),150, 580);
+            font.draw(batch,""+world.getScorePlayer2(),1130, 580);
+            for(int i = 0; i<swordX.length; i++){
+                batch.draw(redBlock, swordX[i], swordY[i]);
+            }
+            for(int i = 0; i<defenseX.length; i++){
+                batch.draw(blueBlock, defenseX[i], defenseY[i]);
             }
             batch.end();
         }

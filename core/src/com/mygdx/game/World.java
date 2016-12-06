@@ -17,7 +17,7 @@ public class World {
     boolean[] player2; 
     int timePlayer1;
     int timePlayer2;
-    int gameStage = 1;
+    int gameStage = 0;
     int scorePlayer1 = 0;
     int scorePlayer2 = 0;
     
@@ -54,22 +54,45 @@ public class World {
             int atime2 = player2Stage(defense,numDefense);
             if(atime1>atime2) {
                 System.out.println("Attack Success!!");
-                scorePlayer1++;
+                this.scorePlayer1++;
                 gameStage=0;
             }
-            if(atime1<atime2)
+            if(atime1<atime2) {
                 System.out.println("Attack fail!!");
+                gameStage=0;
+            }
         }
         if(gameStage==3) {
             int btime1 = player1Stage(defense,numDefense);
             int btime2 = player2Stage(sword,numSword);
-            if(btime1>btime2)
+            if(btime1>btime2) {
                 System.out.println("Attack fail!!");
-            if(btime1<btime2) {
-                System.out.println("Attack Success!!");
-                scorePlayer2++;
                 gameStage=0;
             }
+            if(btime1<btime2) {
+                System.out.println("Attack Success!!");
+                this.scorePlayer2++;
+                gameStage=0;
+            }
+        }
+        if(gameStage == 0)
+        {
+            do {
+                numBlock = getRandom(numBlock);
+            } while(checkArray(numBlock) == false);
+            player1 = setButton(numBlock);
+            player2 = setButton(numBlock);
+            do {
+                do {
+                    numSword = getRandom(numSword);
+                } while(checkArray(numSword) == false);
+                do {
+                    numDefense = getRandom(numDefense);
+                } while(checkArray(numDefense) == false);
+            } while(checkArray2(numDefense,numSword) == false);
+            sword = setButton(numSword);
+            defense = setButton(numDefense);
+        	gameStage =1;
         }
     }
     
